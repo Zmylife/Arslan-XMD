@@ -14,7 +14,7 @@ module.exports = {
     AUTO_VOICE: process.env.AUTO_VOICE || "true",
     AUTO_STICKER: process.env.AUTO_STICKER || "false",
     AUTO_REPLY: process.env.AUTO_REPLY || "false",
-    ALIVE_IMG: process.env.ALIVE_IMG || "https://github.com/Arslan-MD/Arslan-XMD/blob/main/assets/1737449197797.jpg",
+    ALIVE_IMG: process.env.ALIVE_IMG || "https://imgur.com/a/H0T75JV",
     ALIVE_MSG: process.env.ALIVE_MSG || "HII DEAR IM ONLINE I'M Arslan-XMD WHATSAPP BOT 😊♻️",
     ANTI_LINK: process.env.ANTI_LINK || "true",
     ANTI_BAD: process.env.ANTI_BAD || "true",
