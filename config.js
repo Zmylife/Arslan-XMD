@@ -8,7 +8,7 @@ module.exports = {
     SESSION_ID: process.env.SESSION_ID || "dW0XBYIY#LEV1r1BZu4VGhMrUqpcDo2kbEuC0tAnkv23CW0TOsFI",
     CAPTION: process.env.CAPTION || "POWERED BY Arslan-MD Official",
     AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
-    AUTO_REPLY_STATUS: process.env.AUTO_REPLY_STATUS || "true",
+    AUTO_REPLY_STATUS: process.env.AUTO_REPLY_STATUS || "false",
     READ_MESSAGE: process.env.READ_MESSAGE || "true", // Added auto-read configuration
     MODE: process.env.MODE || "public",
     AUTO_VOICE: process.env.AUTO_VOICE || "true",
