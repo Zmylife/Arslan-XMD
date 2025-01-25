@@ -13,7 +13,7 @@ cmd({
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
         // Generate system status message
-        const status = `╭━━〔 *KHAN-MD* 〕━━┈⊷
+        const status = `╭━━〔 *Arslan-XMD* 〕━━┈⊷
 ┃◈╭─────────────·๏
 ┃◈┃• *⏳Uptime*:  ${runtime(process.uptime())} 
 ┃◈┃• *📟 Ram usage*: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${(os.totalmem() / 1024 / 1024).toFixed(2)}MB
@@ -26,7 +26,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
         // Send the status message with an image
         await conn.sendMessage(from, { 
-            image: { url: `https://files.catbox.moe/juroe8.jpg` },  // Image URL
+            image: { url: `https://i.ibb.co/71QtjpB/1737449197797.jpg` },  // Image URL
             caption: status,
             contextInfo: {
                 mentionedJid: [m.sender],
