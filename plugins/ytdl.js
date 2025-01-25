@@ -1,3 +1,767 @@
+const {
+  cmd,
+  commands
+} = require("../command");
+const yts = require("yt-search");
+const {
+  fetchJson
+} = require("../lib/functions");
+const {
+  ytsearch,
+  ytmp3
+} = require('@dark-yasiya/yt-dl.js');
+const axios = require("axios");
+async function ytmp4(_0x2350f4, _0x1e813d) {
+  try {
+    if (!_0x2350f4 || !_0x1e813d) {
+      throw new Error("url and format parameters are required.");
+    }
+    const _0x155531 = parseInt(_0x1e813d.replace('p', ''), 0xa);
+    const _0x1ae345 = {
+      'button': 0x1,
+      'start': 0x1,
+      'end': 0x1,
+      'format': _0x155531,
+      'url': _0x2350f4
+    };
+    const _0xb9e379 = {
+      'Accept': "*/*",
+      'Accept-Encoding': "gzip, deflate, br",
+      'Accept-Language': "en-GB,en-US;q=0.9,en;q=0.8",
+      'Origin': "https://loader.to",
+      'Referer': 'https://loader.to',
+      'Sec-Ch-Ua': "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+      'Sec-Ch-Ua-Mobile': '?1',
+      'Sec-Ch-Ua-Platform': "\"Android\"",
+      'Sec-Fetch-Dest': "empty",
+      'Sec-Fetch-Mode': 'cors',
+      'Sec-Fetch-Site': "cross-site",
+      'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+    };
+    const _0x58e175 = await axios.get('https://ab.cococococ.com/ajax/download.php', {
+      'params': _0x1ae345,
+      'headers': _0xb9e379
+    });
+    const _0x3cd985 = _0x58e175.data.id;
+    const _0x3cc28c = async () => {
+      const _0x57899a = {
+        'id': _0x3cd985
+      };
+      try {
+        const _0x31ac54 = await axios.get("https://p.oceansaver.in/ajax/progress.php", {
+          'params': _0x57899a,
+          'headers': _0xb9e379
+        });
+        const {
+          progress: _0x528330,
+          download_url: _0x2eecb3,
+          text: _0x5c5bdf
+        } = _0x31ac54.data;
+        return _0x5c5bdf === "Finished" ? _0x2eecb3 : (await new Promise(_0x396736 => setTimeout(_0x396736, 0x3e8)), _0x3cc28c());
+      } catch (_0x265b2d) {
+        throw new Error("Error in progress check: " + _0x265b2d.message);
+      }
+    };
+    return await _0x3cc28c();
+  } catch (_0x310c4b) {
+    console.error("Error:", _0x310c4b);
+    return {
+      'error': _0x310c4b.message
+    };
+  }
+}
+module.exports = {
+  'ytmp4': ytmp4
+};
+function extractYouTubeId(_0x170001) {
+  const _0x50fae6 = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|playlist\?list=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const _0x1157a3 = _0x170001.match(_0x50fae6);
+  return _0x1157a3 ? _0x1157a3[0x1] : null;
+}
+function convertYouTubeLink(_0xa9eec5) {
+  const _0x434739 = extractYouTubeId(_0xa9eec5);
+  if (_0x434739) {
+    return "https://www.youtube.com/watch?v=" + _0x434739;
+  }
+  return _0xa9eec5;
+}
+cmd({
+  'pattern': "song",
+  'alias': 'play',
+  'desc': "To download songs.",
+  'react': '🎵',
+  'category': 'download',
+  'filename': __filename
+}, async (_0xa257b4, _0x2f727a, _0x359db2, {
+  from: _0x20dbcc,
+  quoted: _0x54a89a,
+  body: _0x3e7e0f,
+  isCmd: _0x48a250,
+  command: _0x77dc65,
+  args: _0xff6f6,
+  q: _0x5986de,
+  isGroup: _0x3d307b,
+  sender: _0x1679f4,
+  senderNumber: _0x42db90,
+  botNumber2: _0x211709,
+  botNumber: _0xd31293,
+  pushname: _0x2168a0,
+  isMe: _0x55269c,
+  isOwner: _0x15f737,
+  groupMetadata: _0xc4a470,
+  groupName: _0x395c79,
+  participants: _0x14f2b2,
+  groupAdmins: _0x29efac,
+  isBotAdmins: _0x1e6418,
+  isAdmins: _0x2bb61a,
+  reply: _0x5bb2a2
+}) => {
+  try {
+    if (!_0x5986de) {
+      return _0x5bb2a2("Please give me a URL or title.");
+    }
+    _0x5986de = convertYouTubeLink(_0x5986de);
+    const _0x5ec17c = await yts(_0x5986de);
+    const _0x54a5b7 = _0x5ec17c.videos[0x0];
+    const _0x1ae271 = _0x54a5b7.url;
+    let _0x301438 = "\n*SOBI-MD-MUSIC*\n❍ *ᴛɪᴛʟᴇ :* " + _0x54a5b7.title + "\n❍ *ᴅᴜʀᴀᴛɪᴏɴ :* " + _0x54a5b7.timestamp + "\n❍ *ᴠɪᴇᴡꜱ :* " + _0x54a5b7.views + "\n❍ *ᴜᴘʟᴏᴀᴅ ᴏɴ :* " + _0x54a5b7.ago + "\n*ʀᴇᴘʟʏ ʙᴇʟᴏᴡ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴛᴏ*\n*ᴅᴏᴡɴʟᴏᴀᴅ ꜰʀᴏᴍᴀᴛ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴀᴜᴅɪᴏ 🎧*\n\n*1*     ┃  *ᴀᴜᴅɪᴏ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴅᴏᴄᴜᴍᴇɴᴛ 📁*\n\n*2*     ┃  *ᴅᴏᴄᴜᴍᴇɴᴛ*\n\nSOBIA MD ✻\n";
+    const _0x26c9a8 = await _0xa257b4.sendMessage(_0x20dbcc, {
+      'image': {
+        'url': _0x54a5b7.thumbnail
+      },
+      'caption': _0x301438,
+      'contextInfo': {
+        'mentionedJid': ["923251869133@s.whatsapp.net"],
+        'groupMentions': [],
+        'forwardingScore': 0x1,
+        'isForwarded': true,
+        'forwardedNewsletterMessageInfo': {
+          'newsletterJid': "120363352224008317@newsletter",
+          'newsletterName': "SOBIA MD✻",
+          'serverMessageId': 0x3e7
+        },
+        'externalAdReply': {
+          'title': "SOBIA MD",
+          'body': "SOBIA MD",
+          'mediaType': 0x1,
+          'sourceUrl': "https://github.com/SILENTLOVER40",
+          'thumbnailUrl': "https://i.ibb.co/mbGXCfd/Manul-Ofc-X.jpg",
+          'renderLargerThumbnail': false,
+          'showAdAttribution': true
+        }
+      }
+    }, {
+      'quoted': _0x2f727a
+    });
+    const _0x1af136 = _0x26c9a8.key.id;
+    _0xa257b4.ev.on('messages.upsert', async _0x4c516c => {
+      const _0x54fc28 = _0x4c516c.messages[0x0];
+      if (!_0x54fc28.message) {
+        return;
+      }
+      const _0x3d50b8 = _0x54fc28.message.conversation || _0x54fc28.message.extendedTextMessage?.['text'];
+      const _0xab2183 = _0x54fc28.key.remoteJid;
+      const _0x4a15e2 = _0x54fc28.message.extendedTextMessage && _0x54fc28.message.extendedTextMessage.contextInfo.stanzaId === _0x1af136;
+      if (_0x4a15e2) {
+        await _0xa257b4.sendMessage(_0xab2183, {
+          'react': {
+            'text': '⬇️',
+            'key': _0x54fc28.key
+          }
+        });
+        if (_0x3d50b8 === '1') {
+          const _0x42f451 = await ytmp3(_0x1ae271);
+          await _0xa257b4.sendMessage(_0xab2183, {
+            'react': {
+              'text': '⬆️',
+              'key': _0x54fc28.key
+            }
+          });
+          await _0xa257b4.sendMessage(_0xab2183, {
+            'audio': {
+              'url': _0x42f451.download.url
+            },
+            'mimetype': "audio/mpeg",
+            'contextInfo': {
+              'mentionedJid': ["923251869133@s.whatsapp.net"],
+              'groupMentions': [],
+              'forwardingScore': 0x1,
+              'isForwarded': true,
+              'forwardedNewsletterMessageInfo': {
+                'newsletterJid': "120363352224008317@newsletter",
+                'newsletterName': "SOBIA MD✻",
+                'serverMessageId': 0x3e7
+              },
+              'externalAdReply': {
+                'title': "SOBIA MD",
+                'body': "SOBIA MD",
+                'mediaType': 0x1,
+                'sourceUrl': _0x54a5b7.url,
+                'thumbnailUrl': _0x54a5b7.thumbnail,
+                'renderLargerThumbnail': false,
+                'showAdAttribution': true
+              }
+            }
+          }, {
+            'quoted': _0x54fc28
+          });
+          await _0xa257b4.sendMessage(_0xab2183, {
+            'react': {
+              'text': '✅',
+              'key': _0x54fc28.key
+            }
+          });
+        } else {
+          if (_0x3d50b8 === '2') {
+            const _0x429e05 = await ytmp3(_0x1ae271);
+            await _0xa257b4.sendMessage(_0xab2183, {
+              'react': {
+                'text': '⬆️',
+                'key': _0x54fc28.key
+              }
+            });
+            await _0xa257b4.sendMessage(_0xab2183, {
+              'document': {
+                'url': _0x429e05.download.url
+              },
+              'mimetype': "audio/mp3",
+              'fileName': _0x54a5b7.title + ".mp3",
+              'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ʙᴜᴛᴛ*\n ",
+              'contextInfo': {
+                'mentionedJid': ['923251869133@s.whatsapp.net'],
+                'groupMentions': [],
+                'forwardingScore': 0x1,
+                'isForwarded': true,
+                'forwardedNewsletterMessageInfo': {
+                  'newsletterJid': "120363352224008317@newsletter",
+                  'newsletterName': "SOBIA MD",
+                  'serverMessageId': 0x3e7
+                },
+                'externalAdReply': {
+                  'title': "SOBIA-MD",
+                  'body': "SOBIA MD",
+                  'mediaType': 0x1,
+                  'sourceUrl': _0x54a5b7.url,
+                  'thumbnailUrl': _0x54a5b7.thumbnail,
+                  'renderLargerThumbnail': false,
+                  'showAdAttribution': true
+                }
+              }
+            }, {
+              'quoted': _0x54fc28
+            });
+            await _0xa257b4.sendMessage(_0xab2183, {
+              'react': {
+                'text': '✅',
+                'key': _0x54fc28.key
+              }
+            });
+            await _0xa257b4.sendMessage(_0xab2183, {
+              'delete': _0x26c9a8.key
+            });
+          }
+        }
+      }
+    });
+  } catch (_0x167ef6) {
+    console.log(_0x167ef6);
+    _0x5bb2a2('' + _0x167ef6);
+  }
+});
+cmd({
+  'pattern': "video",
+  'desc': "To download videos.",
+  'react': '🎥',
+  'category': 'download',
+  'filename': __filename
+}, async (_0x44d9c0, _0xae03c, _0x1a31e8, {
+  from: _0xb04429,
+  quoted: _0x5f235f,
+  body: _0x2c13f6,
+  isCmd: _0x4e8f66,
+  command: _0x59e310,
+  args: _0x52d46e,
+  q: _0x3b9d7e,
+  isGroup: _0x4fce36,
+  sender: _0x55f035,
+  senderNumber: _0x1d989c,
+  botNumber2: _0x52a196,
+  botNumber: _0x2e3a4c,
+  pushname: _0x22b715,
+  isMe: _0xa836cb,
+  isOwner: _0x3ed134,
+  groupMetadata: _0x1aeec0,
+  groupName: _0x55257b,
+  participants: _0x1fdb3e,
+  groupAdmins: _0x151fd5,
+  isBotAdmins: _0x564c40,
+  isAdmins: _0x4480f0,
+  reply: _0xa6d47f
+}) => {
+  try {
+    if (!_0x3b9d7e) {
+      return _0xa6d47f("Please give me a URL or title.");
+    }
+    _0x3b9d7e = convertYouTubeLink(_0x3b9d7e);
+    const _0xd36994 = await yts(_0x3b9d7e);
+    const _0x5ccecb = _0xd36994.videos[0x0];
+    const _0x41023c = _0x5ccecb.url;
+    let _0x2405c4 = "\n*SOBIA-MD-VIDEO*\n " + _0x5ccecb.title + "\n❍ *ᴅᴜʀᴀᴛɪᴏɴ :* " + _0x5ccecb.timestamp + "\n❍ *ᴠɪᴇᴡꜱ :* " + _0x5ccecb.views + "\n❍ *ᴜᴘʟᴏᴀᴅ ᴏɴ :* " + _0x5ccecb.ago + "\n\n*ʀᴇᴘʟʏ ʙᴇʟᴏᴡ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴛᴏ*\n*ᴅᴏᴡɴʟᴏᴀᴅ ꜰʀᴏᴍᴀᴛ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴠɪᴅᴇᴏ 🎬*\n\n*1.1*     ┃  *360ᴘ*\n*1.2*     ┃  *480ᴘ*\n*1.3*     ┃  *720ᴘ*\n*1.4*     ┃  *1080ᴘ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴅᴏᴄᴜᴍᴇɴᴛ 📁*\n\n*2.1*     ┃  *360ᴘ*\n*2.2*     ┃  *480ᴘ*\n*2.3*     ┃  *720ᴘ*\n*2.4*     ┃  *1080ᴘ*\n\n> SOBIA-MD ✻\n";
+    const _0x12c73b = await _0x44d9c0.sendMessage(_0xb04429, {
+      'image': {
+        'url': _0x5ccecb.thumbnail
+      },
+      'caption': _0x2405c4,
+      'contextInfo': {
+        'mentionedJid': ["923251869133@s.whatsapp.net"],
+        'groupMentions': [],
+        'forwardingScore': 0x1,
+        'isForwarded': true,
+        'forwardedNewsletterMessageInfo': {
+          'newsletterJid': '120363352224008317@newsletter',
+          'newsletterName': "SILENT-SOBX-MD ✻",
+          'serverMessageId': 0x3e7
+        },
+        'externalAdReply': {
+          'title': "SOBIA BUTT",
+          'body': "SOBIA MD",
+          'mediaType': 0x1,
+          'sourceUrl': "https://github.com/SILENTLOVER40",
+          'thumbnailUrl': "https://i.ibb.co/mbGXCfd/Manul-Ofc-X.jpg",
+          'renderLargerThumbnail': false,
+          'showAdAttribution': true
+        }
+      }
+    }, {
+      'quoted': _0xae03c
+    });
+    const _0x109c9b = _0x12c73b.key.id;
+    _0x44d9c0.ev.on("messages.upsert", async _0x9cb8a6 => {
+      const _0x3623ef = _0x9cb8a6.messages[0x0];
+      if (!_0x3623ef.message) {
+        return;
+      }
+      const _0x38eb1a = _0x3623ef.message.conversation || _0x3623ef.message.extendedTextMessage?.['text'];
+      const _0x1eb55b = _0x3623ef.key.remoteJid;
+      const _0x4fc52a = _0x3623ef.message.extendedTextMessage && _0x3623ef.message.extendedTextMessage.contextInfo.stanzaId === _0x109c9b;
+      if (_0x4fc52a) {
+        await _0x44d9c0.sendMessage(_0x1eb55b, {
+          'react': {
+            'text': '⬇️',
+            'key': _0x3623ef.key
+          }
+        });
+        if (_0x38eb1a === '1.1') {
+          const _0x34f72d = await ytmp4('' + _0x41023c, '360p');
+          await _0x44d9c0.sendMessage(_0x1eb55b, {
+            'delete': _0x12c73b.key
+          });
+          await _0x44d9c0.sendMessage(_0x1eb55b, {
+            'react': {
+              'text': '⬆️',
+              'key': _0x3623ef.key
+            }
+          });
+          await _0x44d9c0.sendMessage(_0x1eb55b, {
+            'video': {
+              'url': _0x34f72d
+            },
+            'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ʙᴜᴛᴛ*\n",
+            'contextInfo': {
+              'mentionedJid': ['923251869133@s.whatsapp.net'],
+              'groupMentions': [],
+              'forwardingScore': 0x1,
+              'isForwarded': true,
+              'forwardedNewsletterMessageInfo': {
+                'newsletterJid': "120363352224008317@newsletter",
+                'newsletterName': "SOBIA BUTT ✻",
+                'serverMessageId': 0x3e7
+              },
+              'externalAdReply': {
+                'title': "SOBIA BUTT ",
+                'body': "SOBIA MD",
+                'mediaType': 0x1,
+                'sourceUrl': _0x5ccecb.url,
+                'thumbnailUrl': _0x5ccecb.thumbnail,
+                'renderLargerThumbnail': false,
+                'showAdAttribution': true
+              }
+            }
+          }, {
+            'quoted': _0x3623ef
+          });
+          await _0x44d9c0.sendMessage(_0x1eb55b, {
+            'react': {
+              'text': '✅',
+              'key': _0x3623ef.key
+            }
+          });
+        } else {
+          if (_0x38eb1a === "1.2") {
+            const _0x139ef9 = await ytmp4('' + _0x41023c, '480');
+            await _0x44d9c0.sendMessage(_0x1eb55b, {
+              'delete': _0x12c73b.key
+            });
+            await _0x44d9c0.sendMessage(_0x1eb55b, {
+              'react': {
+                'text': '⬆️',
+                'key': _0x3623ef.key
+              }
+            });
+            await _0x44d9c0.sendMessage(_0x1eb55b, {
+              'video': {
+                'url': _0x139ef9
+              },
+              'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ʙᴜᴛᴛ*\n",
+              'contextInfo': {
+                'mentionedJid': ["923251869133@s.whatsapp.net"],
+                'groupMentions': [],
+                'forwardingScore': 0x1,
+                'isForwarded': true,
+                'forwardedNewsletterMessageInfo': {
+                  'newsletterJid': '120363352224008317@newsletter',
+                  'newsletterName': "sᴏʙɪᴀ ᴍᴅ",
+                  'serverMessageId': 0x3e7
+                },
+                'externalAdReply': {
+                  'title': "sᴏʙɪ-ᴍᴅ",
+                  'body': "Sᴏʙɪᴀ ᴍᴅ",
+                  'mediaType': 0x1,
+                  'sourceUrl': _0x5ccecb.url,
+                  'thumbnailUrl': _0x5ccecb.thumbnail,
+                  'renderLargerThumbnail': false,
+                  'showAdAttribution': true
+                }
+              }
+            }, {
+              'quoted': _0x3623ef
+            });
+            await _0x44d9c0.sendMessage(_0x1eb55b, {
+              'react': {
+                'text': '✅',
+                'key': _0x3623ef.key
+              }
+            });
+          } else {
+            if (_0x38eb1a === "1.3") {
+              const _0x2e96d9 = await ytmp4('' + _0x41023c, "720");
+              await _0x44d9c0.sendMessage(_0x1eb55b, {
+                'delete': _0x12c73b.key
+              });
+              await _0x44d9c0.sendMessage(_0x1eb55b, {
+                'react': {
+                  'text': '⬆️',
+                  'key': _0x3623ef.key
+                }
+              });
+              await _0x44d9c0.sendMessage(_0x1eb55b, {
+                'video': {
+                  'url': _0x2e96d9
+                },
+                'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ᴍᴅ*\n",
+                'contextInfo': {
+                  'mentionedJid': ["923251869133@s.whatsapp.net"],
+                  'groupMentions': [],
+                  'forwardingScore': 0x1,
+                  'isForwarded': true,
+                  'forwardedNewsletterMessageInfo': {
+                    'newsletterJid': "120363352224008317@newsletter",
+                    'newsletterName': "Sᴏʙɪᴀ ᴍᴅ",
+                    'serverMessageId': 0x3e7
+                  },
+                  'externalAdReply': {
+                    'title': "sᴏʙɪᴀ ᴍᴅ",
+                    'body': "ᴏʙɪᴀ ᴍᴅ",
+                    'mediaType': 0x1,
+                    'sourceUrl': _0x5ccecb.url,
+                    'thumbnailUrl': _0x5ccecb.thumbnail,
+                    'renderLargerThumbnail': false,
+                    'showAdAttribution': true
+                  }
+                }
+              }, {
+                'quoted': _0x3623ef
+              });
+              await _0x44d9c0.sendMessage(_0x1eb55b, {
+                'react': {
+                  'text': '✅',
+                  'key': _0x3623ef.key
+                }
+              });
+            } else {
+              if (_0x38eb1a === '1.4') {
+                const _0x2ddc2c = await ytmp4('' + _0x41023c, '1080');
+                await _0x44d9c0.sendMessage(_0x1eb55b, {
+                  'delete': _0x12c73b.key
+                });
+                await _0x44d9c0.sendMessage(_0x1eb55b, {
+                  'react': {
+                    'text': '⬆️',
+                    'key': _0x3623ef.key
+                  }
+                });
+                await _0x44d9c0.sendMessage(_0x1eb55b, {
+                  'video': {
+                    'url': _0x2ddc2c
+                  },
+                  'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱɪʟᴇɴᴛ ʟᴏᴠᴇʀ · · ·⁴³²*\n"
+                }, {
+                  'quoted': _0x3623ef
+                });
+                await _0x44d9c0.sendMessage(_0x1eb55b, {
+                  'react': {
+                    'text': '✅',
+                    'key': _0x3623ef.key
+                  }
+                });
+              } else {
+                if (_0x38eb1a === '2.1') {
+                  const _0x5acb6b = await ytmp4('' + _0x41023c, "360");
+                  await _0x44d9c0.sendMessage(_0x1eb55b, {
+                    'delete': _0x12c73b.key
+                  });
+                  await _0x44d9c0.sendMessage(_0x1eb55b, {
+                    'react': {
+                      'text': '⬆️',
+                      'key': _0x3623ef.key
+                    }
+                  });
+                  await _0x44d9c0.sendMessage(_0x1eb55b, {
+                    'document': {
+                      'url': _0x5acb6b
+                    },
+                    'mimetype': "video/mp4",
+                    'fileName': _0x5ccecb.title + ".mp4",
+                    'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ʙᴜᴛᴛ*\n",
+                    'contextInfo': {
+                      'mentionedJid': ["923251869133@s.whatsapp.net"],
+                      'groupMentions': [],
+                      'forwardingScore': 0x1,
+                      'isForwarded': true,
+                      'forwardedNewsletterMessageInfo': {
+                        'newsletterJid': "120363352224008317@newsletter",
+                        'newsletterName': "Sᴏʙɪᴀ ᴍᴅ",
+                        'serverMessageId': 0x3e7
+                      },
+                      'externalAdReply': {
+                        'title': "Arslan-MD",
+                        'body': "Arslan-MD",
+                        'mediaType': 0x1,
+                        'sourceUrl': _0x5ccecb.url,
+                        'thumbnailUrl': _0x5ccecb.thumbnail,
+                        'renderLargerThumbnail': false,
+                        'showAdAttribution': true
+                      }
+                    }
+                  }, {
+                    'quoted': _0x3623ef
+                  });
+                  await _0x44d9c0.sendMessage(_0x1eb55b, {
+                    'react': {
+                      'text': '✅',
+                      'key': _0x3623ef.key
+                    }
+                  });
+                } else {
+                  if (_0x38eb1a === "2.2") {
+                    const _0x11606f = await ytmp4('' + _0x41023c, "480");
+                    await _0x44d9c0.sendMessage(_0x1eb55b, {
+                      'delete': _0x12c73b.key
+                    });
+                    await _0x44d9c0.sendMessage(_0x1eb55b, {
+                      'react': {
+                        'text': '⬆️',
+                        'key': _0x3623ef.key
+                      }
+                    });
+                    await _0x44d9c0.sendMessage(_0x1eb55b, {
+                      'document': {
+                        'url': _0x11606f
+                      },
+                      'mimetype': "video/mp4",
+                      'fileName': _0x5ccecb.title + ".mp4",
+                      'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD*\n",
+                      'contextInfo': {
+                        'mentionedJid': ["923237045919@s.whatsapp.net"],
+                        'groupMentions': [],
+                        'forwardingScore': 0x1,
+                        'isForwarded': true,
+                        'forwardedNewsletterMessageInfo': {
+                          'newsletterJid': "120363352224008317@newsletter",
+                          'newsletterName': "Arslan-MD",
+                          'serverMessageId': 0x3e7
+                        },
+                        'externalAdReply': {
+                          'title': 'Arslan-MD',
+                          'body': "Arslan-MD",
+                          'mediaType': 0x1,
+                          'sourceUrl': _0x5ccecb.url,
+                          'thumbnailUrl': _0x5ccecb.thumbnail,
+                          'renderLargerThumbnail': false,
+                          'showAdAttribution': true
+                        }
+                      }
+                    }, {
+                      'quoted': _0x3623ef
+                    });
+                    await _0x44d9c0.sendMessage(_0x1eb55b, {
+                      'react': {
+                        'text': '✅',
+                        'key': _0x3623ef.key
+                      }
+                    });
+                  } else {
+                    if (_0x38eb1a === "2.3") {
+                      const _0x49fb01 = await ytmp4('' + _0x41023c, "720");
+                      await _0x44d9c0.sendMessage(_0x1eb55b, {
+                        'delete': _0x12c73b.key
+                      });
+                      await _0x44d9c0.sendMessage(_0x1eb55b, {
+                        'react': {
+                          'text': '⬆️',
+                          'key': _0x3623ef.key
+                        }
+                      });
+                      await _0x44d9c0.sendMessage(_0x1eb55b, {
+                        'document': {
+                          'url': _0x49fb01
+                        },
+                        'mimetype': 'video/mp4',
+                        'fileName': _0x5ccecb.title + ".mp4",
+                        'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD*\n",
+                        'contextInfo': {
+                          'mentionedJid': ["923251869133@s.whatsapp.net"],
+                          'groupMentions': [],
+                          'forwardingScore': 0x1,
+                          'isForwarded': true,
+                          'forwardedNewsletterMessageInfo': {
+                            'newsletterJid': "120363352224008317@newsletter",
+                            'newsletterName': "Arslan-MD",
+                            'serverMessageId': 0x3e7
+                          },
+                          'externalAdReply': {
+                            'title': "Arslan-MD ",
+                            'body': "Arslan-MD",
+                            'mediaType': 0x1,
+                            'sourceUrl': _0x5ccecb.url,
+                            'thumbnailUrl': _0x5ccecb.thumbnail,
+                            'renderLargerThumbnail': false,
+                            'showAdAttribution': true
+                          }
+                        }
+                      }, {
+                        'quoted': _0x3623ef
+                      });
+                      await _0x44d9c0.sendMessage(_0x1eb55b, {
+                        'react': {
+                          'text': '✅',
+                          'key': _0x3623ef.key
+                        }
+                      });
+                    } else {
+                      if (_0x38eb1a === "2.4") {
+                        const _0x1633d6 = await ytmp4('' + _0x41023c, "1080");
+                        await _0x44d9c0.sendMessage(_0x1eb55b, {
+                          'delete': _0x12c73b.key
+                        });
+                        await _0x44d9c0.sendMessage(_0x1eb55b, {
+                          'react': {
+                            'text': '⬆️',
+                            'key': _0x3623ef.key
+                          }
+                        });
+                        await _0x44d9c0.sendMessage(_0x1eb55b, {
+                          'document': {
+                            'url': _0x1633d6
+                          },
+                          'mimetype': 'video/mp4',
+                          'fileName': _0x5ccecb.title + ".mp4",
+                          'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD*\n",
+                          'contextInfo': {
+                            'mentionedJid': ["923237045919@s.whatsapp.net"],
+                            'groupMentions': [],
+                            'forwardingScore': 0x1,
+                            'isForwarded': true,
+                            'forwardedNewsletterMessageInfo': {
+                              'newsletterJid': "120363352224008317@newsletter",
+                              'newsletterName': 'Arslan-XMD',
+                              'serverMessageId': 0x3e7
+                            },
+                            'externalAdReply': {
+                              'title': 'Arslan-XMD',
+                              'body': 'Arslan-XMD',
+                              'mediaType': 0x1,
+                              'sourceUrl': _0x5ccecb.url,
+                              'thumbnailUrl': _0x5ccecb.thumbnail,
+                              'renderLargerThumbnail': false,
+                              'showAdAttribution': true
+                            }
+                          }
+                        }, {
+                          'quoted': _0x3623ef
+                        });
+                        await _0x44d9c0.sendMessage(_0x1eb55b, {
+                          'react': {
+                            'text': '✅',
+                            'key': _0x3623ef.key
+                          }
+                        });
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  } catch (_0x235392) {
+    console.log(_0x235392);
+    _0xa6d47f('' + _0x235392);
+  }
+});
+cmd({
+  'pattern': "yta",
+  'alias': "ytmp3",
+  'react': '⬇️',
+  'dontAddCommandList': true,
+  'filename': __filename
+}, async (_0x4082ec, _0x418557, _0x44bbb3, {
+  from: _0x8848c0,
+  q: _0x146c87,
+  reply: _0x5269c9
+}) => {
+  try {
+    if (!_0x146c87) {
+      return await _0x5269c9("*Need a YouTube URL!*");
+    }
+    const _0x33b35c = await fetchJson("https://api.giftedtech.my.id/api/download/ytaud?apikey=gifted&url=" + _0x146c87);
+    const _0xe15cad = _0x33b35c.result.download_url;
+    await _0x4082ec.sendMessage(_0x8848c0, {
+      'audio': {
+        'url': _0xe15cad
+      },
+      'mimetype': "audio/mpeg"
+    }, {
+      'quoted': _0x418557
+    });
+  } catch (_0xe1b1ba) {
+    console.log("First attempt failed:", _0xe1b1ba);
+    try {
+      const _0x4adca5 = await dlyta(_0x146c87);
+      await _0x4082ec.sendMessage(_0x8848c0, {
+        'audio': {
+          'url': _0x4adca5.dl_link
+        },
+        'mimetype': "audio/mpeg"
+      }, {
+        'quoted': _0x418557
+      });
+    } catch (_0x5d778e) {
+      console.log("Second attempt failed:", _0x5d778e);
+      await _0x5269c9("*Failed to process the request. Please try again later!*");
+    }
+  }
+});
 
-
-const _0xb6311a=_0x2178;(function(_0x35707d,_0x16825e){const _0x5b1366=_0x2178,_0x5aab5d=_0x35707d();while(!![]){try{const _0x47439d=-parseInt(_0x5b1366(0x161))/0x1+parseInt(_0x5b1366(0x126))/0x2*(parseInt(_0x5b1366(0x132))/0x3)+-parseInt(_0x5b1366(0x115))/0x4+parseInt(_0x5b1366(0x117))/0x5*(parseInt(_0x5b1366(0x114))/0x6)+-parseInt(_0x5b1366(0x11b))/0x7+parseInt(_0x5b1366(0x13c))/0x8+parseInt(_0x5b1366(0x142))/0x9;if(_0x47439d===_0x16825e)break;else _0x5aab5d['push'](_0x5aab5d['shift']());}catch(_0x39c0d9){_0x5aab5d['push'](_0x5aab5d['shift']());}}}(_0xf4bd,0x2e0f2));function _0x2178(_0x2a5ee4,_0x2d9463){const _0xf4bd0=_0xf4bd();return _0x2178=function(_0x217847,_0x1ae3ce){_0x217847=_0x217847-0x101;let _0x3d8d4c=_0xf4bd0[_0x217847];return _0x3d8d4c;},_0x2178(_0x2a5ee4,_0x2d9463);}const {cmd,commands}=require(_0xb6311a(0x11a)),yts=require(_0xb6311a(0x124)),{fetchJson}=require(_0xb6311a(0x165)),{ytsearch,ytmp3}=require('@dark-yasiya/yt-dl.js'),axios=require(_0xb6311a(0x15a));async function ytmp4(_0x2350f4,_0x1e813d){const _0x502937=_0xb6311a;try{if(!_0x2350f4||!_0x1e813d)throw new Error(_0x502937(0x156));const _0x155531=parseInt(_0x1e813d[_0x502937(0x11d)]('p',''),0xa),_0x1ae345={'button':0x1,'start':0x1,'end':0x1,'format':_0x155531,'url':_0x2350f4},_0xb9e379={'Accept':_0x502937(0x12b),'Accept-Encoding':_0x502937(0x160),'Accept-Language':_0x502937(0x12a),'Origin':_0x502937(0x158),'Referer':'https://loader.to','Sec-Ch-Ua':'\x22Not-A.Brand\x22;v=\x2299\x22,\x20\x22Chromium\x22;v=\x22124\x22','Sec-Ch-Ua-Mobile':'?1','Sec-Ch-Ua-Platform':_0x502937(0x136),'Sec-Fetch-Dest':_0x502937(0x13d),'Sec-Fetch-Mode':'cors','Sec-Fetch-Site':_0x502937(0x146),'User-Agent':_0x502937(0x149)},_0x58e175=await axios[_0x502937(0x14e)]('https://ab.cococococ.com/ajax/download.php',{'params':_0x1ae345,'headers':_0xb9e379}),_0x3cd985=_0x58e175['data']['id'],_0x3cc28c=async()=>{const _0x5d1633=_0x502937,_0x57899a={'id':_0x3cd985};try{const _0x31ac54=await axios[_0x5d1633(0x14e)](_0x5d1633(0x141),{'params':_0x57899a,'headers':_0xb9e379}),{progress:_0x528330,download_url:_0x2eecb3,text:_0x5c5bdf}=_0x31ac54[_0x5d1633(0x14f)];return _0x5c5bdf===_0x5d1633(0x106)?_0x2eecb3:(await new Promise(_0x396736=>setTimeout(_0x396736,0x3e8)),_0x3cc28c());}catch(_0x265b2d){throw new Error(_0x5d1633(0x14a)+_0x265b2d[_0x5d1633(0x127)]);}};return await _0x3cc28c();}catch(_0x310c4b){return console['error'](_0x502937(0x121),_0x310c4b),{'error':_0x310c4b[_0x502937(0x127)]};}}module[_0xb6311a(0x143)]={'ytmp4':ytmp4};function _0xf4bd(){const _0x3bae8f=['log','SOBIA\x20BUTT\x20✻','video','messages.upsert','sendMessage','audio/mpeg','sᴏʙɪ-ᴍᴅ','SOBIA-MD','\x0a*©\x20ᴄʀᴇᴀᴛᴇᴅ\x20ʙʏ\x20ꜱɪʟᴇɴᴛ\x20ʟᴏᴠᴇʀ\x20·\x20·\x20·⁴³²*\x0a','timestamp','First\x20attempt\x20failed:','13956rPVANh','572572HwVzhy','dl_link','590fZeaxy','480','url','../command','429877SbcWhT','120363352224008317@newsletter','replace','.mp3','1.3','\x0a*SOBIA-MD-VIDEO*\x0a\x20','Error:','SOBIA\x20MD✻','To\x20download\x20videos.','yt-search','.mp4','220238loUEBL','message','*Need\x20a\x20YouTube\x20URL!*','messages','en-GB,en-US;q=0.9,en;q=0.8','*/*','\x0a❍\x20*ᴜᴘʟᴏᴀᴅ\x20ᴏɴ\x20:*\x20','download','\x0a*©\x20ᴄʀᴇᴀᴛᴇᴅ\x20ʙʏ\x20ꜱᴏʙɪᴀ-ʙᴜᴛᴛ*\x0a','\x0a*©\x20ᴄʀᴇᴀᴛᴇᴅ\x20ʙʏ\x20ꜱᴏʙɪᴀ\x20ᴍᴅ*\x0a','stanzaId','Please\x20give\x20me\x20a\x20URL\x20or\x20title.','3WoLVxR','\x0a*ʀᴇᴘʟʏ\x20ʙᴇʟᴏᴡ\x20ᴛʜᴇ\x20ɴᴜᴍʙᴇʀ\x20ᴛᴏ*\x0a*ᴅᴏᴡɴʟᴏᴀᴅ\x20ꜰʀᴏᴍᴀᴛ*\x0a\x0a*ᴅᴏᴡɴʟᴏᴀᴅ\x20ᴀᴜᴅɪᴏ\x20🎧*\x0a\x0a*1*\x20\x20\x20\x20\x20┃\x20\x20*ᴀᴜᴅɪᴏ*\x0a\x0a*ᴅᴏᴡɴʟᴏᴀᴅ\x20ᴅᴏᴄᴜᴍᴇɴᴛ\x20📁*\x0a\x0a*2*\x20\x20\x20\x20\x20┃\x20\x20*ᴅᴏᴄᴜᴍᴇɴᴛ*\x0a\x0aSOBIA\x20MD\x20✻\x0a','thumbnail','extendedTextMessage','\x22Android\x22','2.4','ᴏʙɪᴀ\x20ᴍᴅ','https://www.youtube.com/watch?v=','923251869133@s.whatsapp.net','https://api.giftedtech.my.id/api/download/ytaud?apikey=gifted&url=','354304mGcMms','empty','sᴏʙɪᴀ\x20ᴍᴅ','yta','audio/mp3','https://p.oceansaver.in/ajax/progress.php','1018566qIakaq','exports','720','1.2','cross-site','contextInfo','video/mp4','Mozilla/5.0\x20(Linux;\x20Android\x2010;\x20K)\x20AppleWebKit/537.36\x20(KHTML,\x20like\x20Gecko)\x20Chrome/124.0.0.0\x20Mobile\x20Safari/537.36','Error\x20in\x20progress\x20check:\x20','\x0a*©\x20ᴄʀᴇᴀᴛᴇᴅ\x20ʙʏ\x20ꜱᴏʙɪᴀ\x20ʙᴜᴛᴛ*\x0a\x20','\x0a*©\x20ᴄʀᴇᴀᴛᴇᴅ\x20ʙʏ\x20ꜱᴏʙɪᴀ\x20ʙᴜᴛᴛ*\x0a','*Failed\x20to\x20process\x20the\x20request.\x20Please\x20try\x20again\x20later!*','get','data','360','title','To\x20download\x20songs.','2.2','https://i.ibb.co/mbGXCfd/Manul-Ofc-X.jpg','song','url\x20and\x20format\x20parameters\x20are\x20required.','remoteJid','https://loader.to','conversation','axios','Sᴏʙɪᴀ\x20ᴍᴅ','SOBIA\x20MD','https://github.com/SILENTLOVER40','ago','videos','gzip,\x20deflate,\x20br','148837LlzKFe','\x0a❍\x20*ᴠɪᴇᴡꜱ\x20:*\x20','ytmp3','SILENT-SOBX-MD\x20✻','../lib/functions','2.3','1080','key','match','SOBIA\x20BUTT','Finished','SOBIA\x20BUTT\x20','\x0a❍\x20*ᴅᴜʀᴀᴛɪᴏɴ\x20:*\x20'];_0xf4bd=function(){return _0x3bae8f;};return _0xf4bd();}function extractYouTubeId(_0x170001){const _0x22000f=_0xb6311a,_0x50fae6=/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|playlist\?list=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,_0x1157a3=_0x170001[_0x22000f(0x104)](_0x50fae6);return _0x1157a3?_0x1157a3[0x1]:null;}function convertYouTubeLink(_0xa9eec5){const _0x4748da=_0xb6311a,_0x434739=extractYouTubeId(_0xa9eec5);if(_0x434739)return _0x4748da(0x139)+_0x434739;return _0xa9eec5;}cmd({'pattern':_0xb6311a(0x155),'alias':'play','desc':_0xb6311a(0x152),'react':'🎵','category':'download','filename':__filename},async(_0xa257b4,_0x2f727a,_0x359db2,{from:_0x20dbcc,quoted:_0x54a89a,body:_0x3e7e0f,isCmd:_0x48a250,command:_0x77dc65,args:_0xff6f6,q:_0x5986de,isGroup:_0x3d307b,sender:_0x1679f4,senderNumber:_0x42db90,botNumber2:_0x211709,botNumber:_0xd31293,pushname:_0x2168a0,isMe:_0x55269c,isOwner:_0x15f737,groupMetadata:_0xc4a470,groupName:_0x395c79,participants:_0x14f2b2,groupAdmins:_0x29efac,isBotAdmins:_0x1e6418,isAdmins:_0x2bb61a,reply:_0x5bb2a2})=>{const _0x31002d=_0xb6311a;try{if(!_0x5986de)return _0x5bb2a2(_0x31002d(0x131));_0x5986de=convertYouTubeLink(_0x5986de);const _0x5ec17c=await yts(_0x5986de),_0x54a5b7=_0x5ec17c['videos'][0x0],_0x1ae271=_0x54a5b7[_0x31002d(0x119)];let _0x301438='\x0a*SOBI-MD-MUSIC*\x0a❍\x20*ᴛɪᴛʟᴇ\x20:*\x20'+_0x54a5b7[_0x31002d(0x151)]+_0x31002d(0x108)+_0x54a5b7[_0x31002d(0x112)]+_0x31002d(0x162)+_0x54a5b7['views']+'\x0a❍\x20*ᴜᴘʟᴏᴀᴅ\x20ᴏɴ\x20:*\x20'+_0x54a5b7[_0x31002d(0x15e)]+_0x31002d(0x133);const _0x26c9a8=await _0xa257b4[_0x31002d(0x10d)](_0x20dbcc,{'image':{'url':_0x54a5b7[_0x31002d(0x134)]},'caption':_0x301438,'contextInfo':{'mentionedJid':[_0x31002d(0x13a)],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x31002d(0x11c),'newsletterName':_0x31002d(0x122),'serverMessageId':0x3e7},'externalAdReply':{'title':_0x31002d(0x15c),'body':_0x31002d(0x15c),'mediaType':0x1,'sourceUrl':_0x31002d(0x15d),'thumbnailUrl':_0x31002d(0x154),'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x2f727a}),_0x1af136=_0x26c9a8['key']['id'];_0xa257b4['ev']['on']('messages.upsert',async _0x4c516c=>{const _0x5c49d7=_0x31002d,_0x54fc28=_0x4c516c[_0x5c49d7(0x129)][0x0];if(!_0x54fc28[_0x5c49d7(0x127)])return;const _0x3d50b8=_0x54fc28[_0x5c49d7(0x127)][_0x5c49d7(0x159)]||_0x54fc28[_0x5c49d7(0x127)][_0x5c49d7(0x135)]?.['text'],_0xab2183=_0x54fc28[_0x5c49d7(0x103)]['remoteJid'],_0x4a15e2=_0x54fc28[_0x5c49d7(0x127)]['extendedTextMessage']&&_0x54fc28['message'][_0x5c49d7(0x135)][_0x5c49d7(0x147)][_0x5c49d7(0x130)]===_0x1af136;if(_0x4a15e2){await _0xa257b4['sendMessage'](_0xab2183,{'react':{'text':'⬇️','key':_0x54fc28[_0x5c49d7(0x103)]}});if(_0x3d50b8==='1'){const _0x42f451=await ytmp3(_0x1ae271);await _0xa257b4['sendMessage'](_0xab2183,{'react':{'text':'⬆️','key':_0x54fc28['key']}}),await _0xa257b4[_0x5c49d7(0x10d)](_0xab2183,{'audio':{'url':_0x42f451[_0x5c49d7(0x12d)][_0x5c49d7(0x119)]},'mimetype':_0x5c49d7(0x10e),'contextInfo':{'mentionedJid':[_0x5c49d7(0x13a)],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x5c49d7(0x11c),'newsletterName':_0x5c49d7(0x122),'serverMessageId':0x3e7},'externalAdReply':{'title':_0x5c49d7(0x15c),'body':_0x5c49d7(0x15c),'mediaType':0x1,'sourceUrl':_0x54a5b7[_0x5c49d7(0x119)],'thumbnailUrl':_0x54a5b7[_0x5c49d7(0x134)],'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x54fc28}),await _0xa257b4['sendMessage'](_0xab2183,{'react':{'text':'✅','key':_0x54fc28[_0x5c49d7(0x103)]}});}else{if(_0x3d50b8==='2'){const _0x429e05=await ytmp3(_0x1ae271);await _0xa257b4[_0x5c49d7(0x10d)](_0xab2183,{'react':{'text':'⬆️','key':_0x54fc28[_0x5c49d7(0x103)]}}),await _0xa257b4[_0x5c49d7(0x10d)](_0xab2183,{'document':{'url':_0x429e05[_0x5c49d7(0x12d)][_0x5c49d7(0x119)]},'mimetype':_0x5c49d7(0x140),'fileName':_0x54a5b7['title']+_0x5c49d7(0x11e),'caption':_0x5c49d7(0x14b),'contextInfo':{'mentionedJid':['923251869133@s.whatsapp.net'],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x5c49d7(0x11c),'newsletterName':_0x5c49d7(0x15c),'serverMessageId':0x3e7},'externalAdReply':{'title':_0x5c49d7(0x110),'body':'SOBIA\x20MD','mediaType':0x1,'sourceUrl':_0x54a5b7['url'],'thumbnailUrl':_0x54a5b7[_0x5c49d7(0x134)],'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x54fc28}),await _0xa257b4[_0x5c49d7(0x10d)](_0xab2183,{'react':{'text':'✅','key':_0x54fc28['key']}}),await _0xa257b4[_0x5c49d7(0x10d)](_0xab2183,{'delete':_0x26c9a8[_0x5c49d7(0x103)]});}}}});}catch(_0x167ef6){console[_0x31002d(0x109)](_0x167ef6),_0x5bb2a2(''+_0x167ef6);}}),cmd({'pattern':_0xb6311a(0x10b),'desc':_0xb6311a(0x123),'react':'🎥','category':'download','filename':__filename},async(_0x44d9c0,_0xae03c,_0x1a31e8,{from:_0xb04429,quoted:_0x5f235f,body:_0x2c13f6,isCmd:_0x4e8f66,command:_0x59e310,args:_0x52d46e,q:_0x3b9d7e,isGroup:_0x4fce36,sender:_0x55f035,senderNumber:_0x1d989c,botNumber2:_0x52a196,botNumber:_0x2e3a4c,pushname:_0x22b715,isMe:_0xa836cb,isOwner:_0x3ed134,groupMetadata:_0x1aeec0,groupName:_0x55257b,participants:_0x1fdb3e,groupAdmins:_0x151fd5,isBotAdmins:_0x564c40,isAdmins:_0x4480f0,reply:_0xa6d47f})=>{const _0x3295b3=_0xb6311a;try{if(!_0x3b9d7e)return _0xa6d47f(_0x3295b3(0x131));_0x3b9d7e=convertYouTubeLink(_0x3b9d7e);const _0xd36994=await yts(_0x3b9d7e),_0x5ccecb=_0xd36994[_0x3295b3(0x15f)][0x0],_0x41023c=_0x5ccecb[_0x3295b3(0x119)];let _0x2405c4=_0x3295b3(0x120)+_0x5ccecb[_0x3295b3(0x151)]+_0x3295b3(0x108)+_0x5ccecb[_0x3295b3(0x112)]+_0x3295b3(0x162)+_0x5ccecb['views']+_0x3295b3(0x12c)+_0x5ccecb[_0x3295b3(0x15e)]+'\x0a\x0a*ʀᴇᴘʟʏ\x20ʙᴇʟᴏᴡ\x20ᴛʜᴇ\x20ɴᴜᴍʙᴇʀ\x20ᴛᴏ*\x0a*ᴅᴏᴡɴʟᴏᴀᴅ\x20ꜰʀᴏᴍᴀᴛ*\x0a\x0a*ᴅᴏᴡɴʟᴏᴀᴅ\x20ᴠɪᴅᴇᴏ\x20🎬*\x0a\x0a*1.1*\x20\x20\x20\x20\x20┃\x20\x20*360ᴘ*\x0a*1.2*\x20\x20\x20\x20\x20┃\x20\x20*480ᴘ*\x0a*1.3*\x20\x20\x20\x20\x20┃\x20\x20*720ᴘ*\x0a*1.4*\x20\x20\x20\x20\x20┃\x20\x20*1080ᴘ*\x0a\x0a*ᴅᴏᴡɴʟᴏᴀᴅ\x20ᴅᴏᴄᴜᴍᴇɴᴛ\x20📁*\x0a\x0a*2.1*\x20\x20\x20\x20\x20┃\x20\x20*360ᴘ*\x0a*2.2*\x20\x20\x20\x20\x20┃\x20\x20*480ᴘ*\x0a*2.3*\x20\x20\x20\x20\x20┃\x20\x20*720ᴘ*\x0a*2.4*\x20\x20\x20\x20\x20┃\x20\x20*1080ᴘ*\x0a\x0a>\x20SOBIA-MD\x20✻\x0a';const _0x12c73b=await _0x44d9c0[_0x3295b3(0x10d)](_0xb04429,{'image':{'url':_0x5ccecb[_0x3295b3(0x134)]},'caption':_0x2405c4,'contextInfo':{'mentionedJid':[_0x3295b3(0x13a)],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':'120363352224008317@newsletter','newsletterName':_0x3295b3(0x164),'serverMessageId':0x3e7},'externalAdReply':{'title':_0x3295b3(0x105),'body':_0x3295b3(0x15c),'mediaType':0x1,'sourceUrl':_0x3295b3(0x15d),'thumbnailUrl':_0x3295b3(0x154),'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0xae03c}),_0x109c9b=_0x12c73b[_0x3295b3(0x103)]['id'];_0x44d9c0['ev']['on'](_0x3295b3(0x10c),async _0x9cb8a6=>{const _0x118953=_0x3295b3,_0x3623ef=_0x9cb8a6[_0x118953(0x129)][0x0];if(!_0x3623ef[_0x118953(0x127)])return;const _0x38eb1a=_0x3623ef[_0x118953(0x127)][_0x118953(0x159)]||_0x3623ef[_0x118953(0x127)][_0x118953(0x135)]?.['text'],_0x1eb55b=_0x3623ef[_0x118953(0x103)][_0x118953(0x157)],_0x4fc52a=_0x3623ef['message']['extendedTextMessage']&&_0x3623ef[_0x118953(0x127)][_0x118953(0x135)][_0x118953(0x147)][_0x118953(0x130)]===_0x109c9b;if(_0x4fc52a){await _0x44d9c0['sendMessage'](_0x1eb55b,{'react':{'text':'⬇️','key':_0x3623ef[_0x118953(0x103)]}});if(_0x38eb1a==='1.1'){const _0x34f72d=await ytmp4(''+_0x41023c,'360p');await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'delete':_0x12c73b[_0x118953(0x103)]}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'⬆️','key':_0x3623ef[_0x118953(0x103)]}}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'video':{'url':_0x34f72d},'caption':_0x118953(0x14c),'contextInfo':{'mentionedJid':['923251869133@s.whatsapp.net'],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x118953(0x11c),'newsletterName':_0x118953(0x10a),'serverMessageId':0x3e7},'externalAdReply':{'title':'SOBIA\x20BUTT\x20','body':'SOBIA\x20MD','mediaType':0x1,'sourceUrl':_0x5ccecb[_0x118953(0x119)],'thumbnailUrl':_0x5ccecb[_0x118953(0x134)],'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x3623ef}),await _0x44d9c0['sendMessage'](_0x1eb55b,{'react':{'text':'✅','key':_0x3623ef['key']}});}else{if(_0x38eb1a===_0x118953(0x145)){const _0x139ef9=await ytmp4(''+_0x41023c,'480');await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'delete':_0x12c73b['key']}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'⬆️','key':_0x3623ef[_0x118953(0x103)]}}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'video':{'url':_0x139ef9},'caption':'\x0a*©\x20ᴄʀᴇᴀᴛᴇᴅ\x20ʙʏ\x20ꜱᴏʙɪᴀ\x20ʙᴜᴛᴛ*\x0a','contextInfo':{'mentionedJid':[_0x118953(0x13a)],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':'120363352224008317@newsletter','newsletterName':'sᴏʙɪᴀ\x20ᴍᴅ','serverMessageId':0x3e7},'externalAdReply':{'title':_0x118953(0x10f),'body':_0x118953(0x15b),'mediaType':0x1,'sourceUrl':_0x5ccecb[_0x118953(0x119)],'thumbnailUrl':_0x5ccecb[_0x118953(0x134)],'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x3623ef}),await _0x44d9c0['sendMessage'](_0x1eb55b,{'react':{'text':'✅','key':_0x3623ef[_0x118953(0x103)]}});}else{if(_0x38eb1a===_0x118953(0x11f)){const _0x2e96d9=await ytmp4(''+_0x41023c,_0x118953(0x144));await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'delete':_0x12c73b['key']}),await _0x44d9c0['sendMessage'](_0x1eb55b,{'react':{'text':'⬆️','key':_0x3623ef[_0x118953(0x103)]}}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'video':{'url':_0x2e96d9},'caption':_0x118953(0x12f),'contextInfo':{'mentionedJid':[_0x118953(0x13a)],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x118953(0x11c),'newsletterName':_0x118953(0x15b),'serverMessageId':0x3e7},'externalAdReply':{'title':_0x118953(0x13e),'body':_0x118953(0x138),'mediaType':0x1,'sourceUrl':_0x5ccecb[_0x118953(0x119)],'thumbnailUrl':_0x5ccecb[_0x118953(0x134)],'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x3623ef}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'✅','key':_0x3623ef['key']}});}else{if(_0x38eb1a==='1.4'){const _0x2ddc2c=await ytmp4(''+_0x41023c,'1080');await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'delete':_0x12c73b[_0x118953(0x103)]}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'⬆️','key':_0x3623ef[_0x118953(0x103)]}}),await _0x44d9c0['sendMessage'](_0x1eb55b,{'video':{'url':_0x2ddc2c},'caption':_0x118953(0x111)},{'quoted':_0x3623ef}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'✅','key':_0x3623ef[_0x118953(0x103)]}});}else{if(_0x38eb1a==='2.1'){const _0x5acb6b=await ytmp4(''+_0x41023c,_0x118953(0x150));await _0x44d9c0['sendMessage'](_0x1eb55b,{'delete':_0x12c73b['key']}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'⬆️','key':_0x3623ef[_0x118953(0x103)]}}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'document':{'url':_0x5acb6b},'mimetype':_0x118953(0x148),'fileName':_0x5ccecb[_0x118953(0x151)]+_0x118953(0x125),'caption':_0x118953(0x14c),'contextInfo':{'mentionedJid':[_0x118953(0x13a)],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x118953(0x11c),'newsletterName':_0x118953(0x15b),'serverMessageId':0x3e7},'externalAdReply':{'title':'sᴏʙɪᴀ\x20ᴍᴅ','body':'Sᴏʙɪᴀ\x20ʙᴜᴛᴛ','mediaType':0x1,'sourceUrl':_0x5ccecb[_0x118953(0x119)],'thumbnailUrl':_0x5ccecb[_0x118953(0x134)],'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x3623ef}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'✅','key':_0x3623ef[_0x118953(0x103)]}});}else{if(_0x38eb1a===_0x118953(0x153)){const _0x11606f=await ytmp4(''+_0x41023c,_0x118953(0x118));await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'delete':_0x12c73b['key']}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'⬆️','key':_0x3623ef[_0x118953(0x103)]}}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'document':{'url':_0x11606f},'mimetype':_0x118953(0x148),'fileName':_0x5ccecb[_0x118953(0x151)]+_0x118953(0x125),'caption':_0x118953(0x14c),'contextInfo':{'mentionedJid':[_0x118953(0x13a)],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x118953(0x11c),'newsletterName':_0x118953(0x13e),'serverMessageId':0x3e7},'externalAdReply':{'title':'sᴏʙɪᴀ','body':_0x118953(0x13e),'mediaType':0x1,'sourceUrl':_0x5ccecb[_0x118953(0x119)],'thumbnailUrl':_0x5ccecb[_0x118953(0x134)],'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x3623ef}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'✅','key':_0x3623ef[_0x118953(0x103)]}});}else{if(_0x38eb1a===_0x118953(0x101)){const _0x49fb01=await ytmp4(''+_0x41023c,_0x118953(0x144));await _0x44d9c0['sendMessage'](_0x1eb55b,{'delete':_0x12c73b[_0x118953(0x103)]}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'⬆️','key':_0x3623ef[_0x118953(0x103)]}}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'document':{'url':_0x49fb01},'mimetype':'video/mp4','fileName':_0x5ccecb['title']+_0x118953(0x125),'caption':_0x118953(0x14c),'contextInfo':{'mentionedJid':[_0x118953(0x13a)],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x118953(0x11c),'newsletterName':'SOBIA\x20MD','serverMessageId':0x3e7},'externalAdReply':{'title':_0x118953(0x107),'body':_0x118953(0x105),'mediaType':0x1,'sourceUrl':_0x5ccecb[_0x118953(0x119)],'thumbnailUrl':_0x5ccecb[_0x118953(0x134)],'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x3623ef}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'✅','key':_0x3623ef['key']}});}else{if(_0x38eb1a===_0x118953(0x137)){const _0x1633d6=await ytmp4(''+_0x41023c,_0x118953(0x102));await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'delete':_0x12c73b['key']}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'⬆️','key':_0x3623ef[_0x118953(0x103)]}}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'document':{'url':_0x1633d6},'mimetype':'video/mp4','fileName':_0x5ccecb[_0x118953(0x151)]+_0x118953(0x125),'caption':_0x118953(0x12e),'contextInfo':{'mentionedJid':[_0x118953(0x13a)],'groupMentions':[],'forwardingScore':0x1,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x118953(0x11c),'newsletterName':'SOBIA-MD','serverMessageId':0x3e7},'externalAdReply':{'title':'SOBIA-MD','body':'SOBIA-MD','mediaType':0x1,'sourceUrl':_0x5ccecb[_0x118953(0x119)],'thumbnailUrl':_0x5ccecb[_0x118953(0x134)],'renderLargerThumbnail':![],'showAdAttribution':!![]}}},{'quoted':_0x3623ef}),await _0x44d9c0[_0x118953(0x10d)](_0x1eb55b,{'react':{'text':'✅','key':_0x3623ef[_0x118953(0x103)]}});}}}}}}}}}});}catch(_0x235392){console[_0x3295b3(0x109)](_0x235392),_0xa6d47f(''+_0x235392);}}),cmd({'pattern':_0xb6311a(0x13f),'alias':_0xb6311a(0x163),'react':'⬇️','dontAddCommandList':!![],'filename':__filename},async(_0x4082ec,_0x418557,_0x44bbb3,{from:_0x8848c0,q:_0x146c87,reply:_0x5269c9})=>{const _0x3b3683=_0xb6311a;try{if(!_0x146c87)return await _0x5269c9(_0x3b3683(0x128));const _0x33b35c=await fetchJson(_0x3b3683(0x13b)+_0x146c87),_0xe15cad=_0x33b35c['result']['download_url'];await _0x4082ec[_0x3b3683(0x10d)](_0x8848c0,{'audio':{'url':_0xe15cad},'mimetype':_0x3b3683(0x10e)},{'quoted':_0x418557});}catch(_0xe1b1ba){console['log'](_0x3b3683(0x113),_0xe1b1ba);try{const _0x4adca5=await dlyta(_0x146c87);await _0x4082ec[_0x3b3683(0x10d)](_0x8848c0,{'audio':{'url':_0x4adca5[_0x3b3683(0x116)]},'mimetype':_0x3b3683(0x10e)},{'quoted':_0x418557});}catch(_0x5d778e){console[_0x3b3683(0x109)]('Second\x20attempt\x20failed:',_0x5d778e),await _0x5269c9(_0x3b3683(0x14d));}}});
