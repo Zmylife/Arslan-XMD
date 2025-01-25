@@ -124,28 +124,28 @@ cmd({
     const _0x5ec17c = await yts(_0x5986de);
     const _0x54a5b7 = _0x5ec17c.videos[0x0];
     const _0x1ae271 = _0x54a5b7.url;
-    let _0x301438 = "\n*SOBI-MD-MUSIC*\n❍ *ᴛɪᴛʟᴇ :* " + _0x54a5b7.title + "\n❍ *ᴅᴜʀᴀᴛɪᴏɴ :* " + _0x54a5b7.timestamp + "\n❍ *ᴠɪᴇᴡꜱ :* " + _0x54a5b7.views + "\n❍ *ᴜᴘʟᴏᴀᴅ ᴏɴ :* " + _0x54a5b7.ago + "\n*ʀᴇᴘʟʏ ʙᴇʟᴏᴡ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴛᴏ*\n*ᴅᴏᴡɴʟᴏᴀᴅ ꜰʀᴏᴍᴀᴛ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴀᴜᴅɪᴏ 🎧*\n\n*1*     ┃  *ᴀᴜᴅɪᴏ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴅᴏᴄᴜᴍᴇɴᴛ 📁*\n\n*2*     ┃  *ᴅᴏᴄᴜᴍᴇɴᴛ*\n\nSOBIA MD ✻\n";
+    let _0x301438 = "\n*Arslan-MD-MUSIC*\n❍ *ᴛɪᴛʟᴇ :* " + _0x54a5b7.title + "\n❍ *ᴅᴜʀᴀᴛɪᴏɴ :* " + _0x54a5b7.timestamp + "\n❍ *ᴠɪᴇᴡꜱ :* " + _0x54a5b7.views + "\n❍ *ᴜᴘʟᴏᴀᴅ ᴏɴ :* " + _0x54a5b7.ago + "\n*ʀᴇᴘʟʏ ʙᴇʟᴏᴡ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴛᴏ*\n*ᴅᴏᴡɴʟᴏᴀᴅ ꜰʀᴏᴍᴀᴛ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴀᴜᴅɪᴏ 🎧*\n\n*1*     ┃  *ᴀᴜᴅɪᴏ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴅᴏᴄᴜᴍᴇɴᴛ 📁*\n\n*2*     ┃  *ᴅᴏᴄᴜᴍᴇɴᴛ*\n\nArslan-MD ✻\n";
     const _0x26c9a8 = await _0xa257b4.sendMessage(_0x20dbcc, {
       'image': {
         'url': _0x54a5b7.thumbnail
       },
       'caption': _0x301438,
       'contextInfo': {
-        'mentionedJid': ["923251869133@s.whatsapp.net"],
+        'mentionedJid': ["923237045919@s.whatsapp.net"],
         'groupMentions': [],
         'forwardingScore': 0x1,
         'isForwarded': true,
         'forwardedNewsletterMessageInfo': {
           'newsletterJid': "120363352224008317@newsletter",
-          'newsletterName': "SOBIA MD✻",
+          'newsletterName': "Arslan-MD✻",
           'serverMessageId': 0x3e7
         },
         'externalAdReply': {
-          'title': "SOBIA MD",
-          'body': "SOBIA MD",
+          'title': "Arslan-MD",
+          'body': "Arslan-MD",
           'mediaType': 0x1,
-          'sourceUrl': "https://github.com/SILENTLOVER40",
-          'thumbnailUrl': "https://i.ibb.co/mbGXCfd/Manul-Ofc-X.jpg",
+          'sourceUrl': "https://github.com/Arslan-MD",
+          'thumbnailUrl': "https://i.ibb.co/71QtjpB/1737449197797.jpg",
           'renderLargerThumbnail': false,
           'showAdAttribution': true
         }
@@ -183,18 +183,18 @@ cmd({
             },
             'mimetype': "audio/mpeg",
             'contextInfo': {
-              'mentionedJid': ["923251869133@s.whatsapp.net"],
+              'mentionedJid': ["923237045919@s.whatsapp.net"],
               'groupMentions': [],
               'forwardingScore': 0x1,
               'isForwarded': true,
               'forwardedNewsletterMessageInfo': {
                 'newsletterJid': "120363352224008317@newsletter",
-                'newsletterName': "SOBIA MD✻",
+                'newsletterName': "Arslan-MD✻",
                 'serverMessageId': 0x3e7
               },
               'externalAdReply': {
-                'title': "SOBIA MD",
-                'body': "SOBIA MD",
+                'title': "Arslan-MD",
+                'body': "Arslan-MD",
                 'mediaType': 0x1,
                 'sourceUrl': _0x54a5b7.url,
                 'thumbnailUrl': _0x54a5b7.thumbnail,
@@ -226,20 +226,20 @@ cmd({
               },
               'mimetype': "audio/mp3",
               'fileName': _0x54a5b7.title + ".mp3",
-              'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ʙᴜᴛᴛ*\n ",
+              'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD*\n ",
               'contextInfo': {
-                'mentionedJid': ['923251869133@s.whatsapp.net'],
+                'mentionedJid': ['923237045919@s.whatsapp.net'],
                 'groupMentions': [],
                 'forwardingScore': 0x1,
                 'isForwarded': true,
                 'forwardedNewsletterMessageInfo': {
                   'newsletterJid': "120363352224008317@newsletter",
-                  'newsletterName': "SOBIA MD",
+                  'newsletterName': "Arslan-MD",
                   'serverMessageId': 0x3e7
                 },
                 'externalAdReply': {
-                  'title': "SOBIA-MD",
-                  'body': "SOBIA MD",
+                  'title': "Arslan-MD",
+                  'body': "Arslan-MD",
                   'mediaType': 0x1,
                   'sourceUrl': _0x54a5b7.url,
                   'thumbnailUrl': _0x54a5b7.thumbnail,
@@ -306,28 +306,28 @@ cmd({
     const _0xd36994 = await yts(_0x3b9d7e);
     const _0x5ccecb = _0xd36994.videos[0x0];
     const _0x41023c = _0x5ccecb.url;
-    let _0x2405c4 = "\n*SOBIA-MD-VIDEO*\n " + _0x5ccecb.title + "\n❍ *ᴅᴜʀᴀᴛɪᴏɴ :* " + _0x5ccecb.timestamp + "\n❍ *ᴠɪᴇᴡꜱ :* " + _0x5ccecb.views + "\n❍ *ᴜᴘʟᴏᴀᴅ ᴏɴ :* " + _0x5ccecb.ago + "\n\n*ʀᴇᴘʟʏ ʙᴇʟᴏᴡ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴛᴏ*\n*ᴅᴏᴡɴʟᴏᴀᴅ ꜰʀᴏᴍᴀᴛ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴠɪᴅᴇᴏ 🎬*\n\n*1.1*     ┃  *360ᴘ*\n*1.2*     ┃  *480ᴘ*\n*1.3*     ┃  *720ᴘ*\n*1.4*     ┃  *1080ᴘ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴅᴏᴄᴜᴍᴇɴᴛ 📁*\n\n*2.1*     ┃  *360ᴘ*\n*2.2*     ┃  *480ᴘ*\n*2.3*     ┃  *720ᴘ*\n*2.4*     ┃  *1080ᴘ*\n\n> SOBIA-MD ✻\n";
+    let _0x2405c4 = "\n*Arslan-MD-VIDEO*\n " + _0x5ccecb.title + "\n❍ *ᴅᴜʀᴀᴛɪᴏɴ :* " + _0x5ccecb.timestamp + "\n❍ *ᴠɪᴇᴡꜱ :* " + _0x5ccecb.views + "\n❍ *ᴜᴘʟᴏᴀᴅ ᴏɴ :* " + _0x5ccecb.ago + "\n\n*ʀᴇᴘʟʏ ʙᴇʟᴏᴡ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴛᴏ*\n*ᴅᴏᴡɴʟᴏᴀᴅ ꜰʀᴏᴍᴀᴛ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴠɪᴅᴇᴏ 🎬*\n\n*1.1*     ┃  *360ᴘ*\n*1.2*     ┃  *480ᴘ*\n*1.3*     ┃  *720ᴘ*\n*1.4*     ┃  *1080ᴘ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴅᴏᴄᴜᴍᴇɴᴛ 📁*\n\n*2.1*     ┃  *360ᴘ*\n*2.2*     ┃  *480ᴘ*\n*2.3*     ┃  *720ᴘ*\n*2.4*     ┃  *1080ᴘ*\n\n> Arslan-MD ✻\n";
     const _0x12c73b = await _0x44d9c0.sendMessage(_0xb04429, {
       'image': {
         'url': _0x5ccecb.thumbnail
       },
       'caption': _0x2405c4,
       'contextInfo': {
-        'mentionedJid': ["923251869133@s.whatsapp.net"],
+        'mentionedJid': ["923237045919@s.whatsapp.net"],
         'groupMentions': [],
         'forwardingScore': 0x1,
         'isForwarded': true,
         'forwardedNewsletterMessageInfo': {
           'newsletterJid': '120363352224008317@newsletter',
-          'newsletterName': "SILENT-SOBX-MD ✻",
+          'newsletterName': "Arslan-MD ✻",
           'serverMessageId': 0x3e7
         },
         'externalAdReply': {
-          'title': "SOBIA BUTT",
-          'body': "SOBIA MD",
+          'title': "Arslan-MD",
+          'body': "Arslan-MD",
           'mediaType': 0x1,
-          'sourceUrl': "https://github.com/SILENTLOVER40",
-          'thumbnailUrl': "https://i.ibb.co/mbGXCfd/Manul-Ofc-X.jpg",
+          'sourceUrl': "https://github.com/Arslan-MD",
+          'thumbnailUrl': "https://i.ibb.co/71QtjpB/1737449197797.jpg",
           'renderLargerThumbnail': false,
           'showAdAttribution': true
         }
@@ -366,20 +366,20 @@ cmd({
             'video': {
               'url': _0x34f72d
             },
-            'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ʙᴜᴛᴛ*\n",
+            'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD*\n",
             'contextInfo': {
-              'mentionedJid': ['923251869133@s.whatsapp.net'],
+              'mentionedJid': ['923237045919@s.whatsapp.net'],
               'groupMentions': [],
               'forwardingScore': 0x1,
               'isForwarded': true,
               'forwardedNewsletterMessageInfo': {
                 'newsletterJid': "120363352224008317@newsletter",
-                'newsletterName': "SOBIA BUTT ✻",
+                'newsletterName': "Arslan-MD ✻",
                 'serverMessageId': 0x3e7
               },
               'externalAdReply': {
-                'title': "SOBIA BUTT ",
-                'body': "SOBIA MD",
+                'title': "Arslan-MD ",
+                'body': "Arslan-MD",
                 'mediaType': 0x1,
                 'sourceUrl': _0x5ccecb.url,
                 'thumbnailUrl': _0x5ccecb.thumbnail,
@@ -412,20 +412,20 @@ cmd({
               'video': {
                 'url': _0x139ef9
               },
-              'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ʙᴜᴛᴛ*\n",
+              'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD*\n",
               'contextInfo': {
-                'mentionedJid': ["923251869133@s.whatsapp.net"],
+                'mentionedJid': ["923237045919@s.whatsapp.net"],
                 'groupMentions': [],
                 'forwardingScore': 0x1,
                 'isForwarded': true,
                 'forwardedNewsletterMessageInfo': {
                   'newsletterJid': '120363352224008317@newsletter',
-                  'newsletterName': "sᴏʙɪᴀ ᴍᴅ",
+                  'newsletterName': "Arslan-MD",
                   'serverMessageId': 0x3e7
                 },
                 'externalAdReply': {
-                  'title': "sᴏʙɪ-ᴍᴅ",
-                  'body': "Sᴏʙɪᴀ ᴍᴅ",
+                  'title': "Arslan-MD,
+                  'body': "Arslan-MD",
                   'mediaType': 0x1,
                   'sourceUrl': _0x5ccecb.url,
                   'thumbnailUrl': _0x5ccecb.thumbnail,
@@ -458,15 +458,15 @@ cmd({
                 'video': {
                   'url': _0x2e96d9
                 },
-                'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ᴍᴅ*\n",
+                'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD*\n",
                 'contextInfo': {
-                  'mentionedJid': ["923251869133@s.whatsapp.net"],
+                  'mentionedJid': ["923237045919@s.whatsapp.net"],
                   'groupMentions': [],
                   'forwardingScore': 0x1,
                   'isForwarded': true,
                   'forwardedNewsletterMessageInfo': {
                     'newsletterJid': "120363352224008317@newsletter",
-                    'newsletterName': "Sᴏʙɪᴀ ᴍᴅ",
+                    'newsletterName': "Arslan-MD",
                     'serverMessageId': 0x3e7
                   },
                   'externalAdReply': {
@@ -504,7 +504,7 @@ cmd({
                   'video': {
                     'url': _0x2ddc2c
                   },
-                  'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱɪʟᴇɴᴛ ʟᴏᴠᴇʀ · · ·⁴³²*\n"
+                  'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD · · ·⁴³²*\n"
                 }, {
                   'quoted': _0x3623ef
                 });
@@ -532,15 +532,15 @@ cmd({
                     },
                     'mimetype': "video/mp4",
                     'fileName': _0x5ccecb.title + ".mp4",
-                    'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴏʙɪᴀ ʙᴜᴛᴛ*\n",
+                    'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD*\n",
                     'contextInfo': {
-                      'mentionedJid': ["923251869133@s.whatsapp.net"],
+                      'mentionedJid': ["923237045919@s.whatsapp.net"],
                       'groupMentions': [],
                       'forwardingScore': 0x1,
                       'isForwarded': true,
                       'forwardedNewsletterMessageInfo': {
                         'newsletterJid': "120363352224008317@newsletter",
-                        'newsletterName': "Sᴏʙɪᴀ ᴍᴅ",
+                        'newsletterName': "Arslan-MD",
                         'serverMessageId': 0x3e7
                       },
                       'externalAdReply': {
@@ -630,7 +630,7 @@ cmd({
                         'fileName': _0x5ccecb.title + ".mp4",
                         'caption': "\n*© ᴄʀᴇᴀᴛᴇᴅ ʙʏ Arslan-MD*\n",
                         'contextInfo': {
-                          'mentionedJid': ["923251869133@s.whatsapp.net"],
+                          'mentionedJid': ["923237045919@s.whatsapp.net"],
                           'groupMentions': [],
                           'forwardingScore': 0x1,
                           'isForwarded': true,
