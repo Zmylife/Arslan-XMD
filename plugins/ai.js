@@ -91,7 +91,7 @@ cmd({
     if (!_0x494f3f.message) {
       return _0x42d581("No response from the AI.");
     }
-    return _0x42d581("🤖 *KHAN-MD MISTRA AI:*\n\n" + _0x494f3f.message);
+    return _0x42d581("🤖 *Arslan-MD MISTRA AI:*\n\n" + _0x494f3f.message);
   } catch (_0x3ec10d) {
     console.error(_0x3ec10d);
     _0x42d581("An error occurred: " + _0x3ec10d.message);
@@ -137,7 +137,7 @@ cmd({
     if (!_0x131af5.message) {
       return _0x4b84f1("No response from the AI.");
     }
-    return _0x4b84f1("🤖 *KHAN-MD CHATGPT 3:*\n\n" + _0x131af5.message);
+    return _0x4b84f1("🤖 *Arslan-MD CHATGPT 3:*\n\n" + _0x131af5.message);
   } catch (_0x5d888b) {
     console.error(_0x5d888b);
     _0x4b84f1("An error occurred: " + _0x5d888b.message);
@@ -183,7 +183,7 @@ cmd({
     if (!_0x11f93c.message) {
       return _0x226670("No response from the AI.");
     }
-    return _0x226670("🤖 *KHAN-MD CHATGPT 4:*\n\n" + _0x11f93c.message);
+    return _0x226670("🤖 *Arslan-MD CHATGPT 4:*\n\n" + _0x11f93c.message);
   } catch (_0x208093) {
     console.error(_0x208093);
     _0x226670("An error occurred: " + _0x208093.message);
@@ -229,7 +229,7 @@ cmd({
     if (!_0x547fe9.message) {
       return _0x49479f("No response from the AI.");
     }
-    return _0x49479f("🤖 *KHAN-MD LLAM AI:*\n\n" + _0x547fe9.message);
+    return _0x49479f("🤖 *Arslan-MD LLAM AI:*\n\n" + _0x547fe9.message);
   } catch (_0x564328) {
     console.error(_0x564328);
     _0x49479f("An error occurred: " + _0x564328.message);
@@ -275,7 +275,7 @@ cmd({
     if (!_0x3cc89d.message) {
       return _0x4babe9("No response from the AI.");
     }
-    return _0x4babe9("🤖 *KHAN-MD META AI:*\n\n" + _0x3cc89d.message);
+    return _0x4babe9("🤖 *Arslan-MD META AI:*\n\n" + _0x3cc89d.message);
   } catch (_0x3ad085) {
     console.error(_0x3ad085);
     _0x4babe9("An error occurred: " + _0x3ad085.message);
@@ -321,7 +321,7 @@ cmd({
     if (!_0x4864e6.message) {
       return _0x2e56e4("No response from the AI.");
     }
-    return _0x2e56e4("🤖 *KHAN-MD CHATGPT 4o:*\n\n" + _0x4864e6.message);
+    return _0x2e56e4("🤖 *Arslan-MD CHATGPT 4o:*\n\n" + _0x4864e6.message);
   } catch (_0x5b623a) {
     console.error(_0x5b623a);
     _0x2e56e4("An error occurred: " + _0x5b623a.message);
@@ -367,7 +367,7 @@ cmd({
     if (!_0x59920f.message) {
       return _0x25da82("No response from the AI.");
     }
-    return _0x25da82("🤖 *Arslan-XMD GOOGLE AI:*\n\n" + _0x59920f.message);
+    return _0x25da82("🤖 *Arslan-MD GOOGLE AI:*\n\n" + _0x59920f.message);
   } catch (_0x4e9059) {
     console.error(_0x4e9059);
     _0x25da82("An error occurred: " + _0x4e9059.message);
