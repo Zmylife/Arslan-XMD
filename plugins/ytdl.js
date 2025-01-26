@@ -424,7 +424,7 @@ cmd({
                   'serverMessageId': 0x3e7
                 },
                 'externalAdReply': {
-                  'title': "Arslan-MD,
+                  'title': "Arslan-XMD,
                   'body': "Arslan-MD",
                   'mediaType': 0x1,
                   'sourceUrl': _0x5ccecb.url,
@@ -470,8 +470,8 @@ cmd({
                     'serverMessageId': 0x3e7
                   },
                   'externalAdReply': {
-                    'title': "sᴏʙɪᴀ ᴍᴅ",
-                    'body': "ᴏʙɪᴀ ᴍᴅ",
+                    'title': "Arslan-XMD",
+                    'body': "Arslan-MD",
                     'mediaType': 0x1,
                     'sourceUrl': _0x5ccecb.url,
                     'thumbnailUrl': _0x5ccecb.thumbnail,
